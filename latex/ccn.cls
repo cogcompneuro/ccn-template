@@ -248,7 +248,7 @@
 
 \newcounter{ccn@affcount}
 \newcommand{\@ccnaffiliations}{}
-\newcommand{\affmark}[1]{\textsuperscript{\scriptsize #1}}
+\newcommand{\affmark}[1]{\textsuperscript{#1}}
 \newcommand{\affiliation}[2]{%
   \g@addto@macro\@ccnaffiliations{\par\affmark{#1}\,#2}%
 }
