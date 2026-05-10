@@ -18,10 +18,10 @@
 %   Modified : Konrad Kording (koerding@gmail.com)     02/15/2017
 %   Modified : Thomas Naselaris (tnaselar@gmail.com)   03/18/2022
 %   Modified : Sneha Aenugu & Jasper van den Bosch     18/12/2024
-%   Modified : Erin Grant                                   v2026.0
+%   Modified : Erin Grant                                   v2026.1
 
 \NeedsTeXFormat{LaTeX2e}[2020/10/01]
-\ProvidesClass{ccn}[v2026.0 CCN Conference Document Class]
+\ProvidesClass{ccn}[v2026.1 CCN Conference Document Class]
 
 %% ============================================================================
 %% VERSION OPTIONS
