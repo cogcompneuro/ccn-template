@@ -267,7 +267,7 @@
 \def\@maketitle{%
   \linewidth\hsize
   \centering
-  {\LARGE\bfseries \@title \par}
+  {\fontsize{14}{16}\selectfont\bfseries \@title \par}
   \vskip 0.75em
   \if@ccnsubmission
     {\large Anonymous Author(s)\par}
