@@ -318,9 +318,9 @@
 %% SECTIONS
 %% ============================================================================
 
-\def\section{\@startsection{section}{1}{\z@}{-1.5ex plus -0.25ex minus -0.2ex}{3pt plus 2pt minus 1pt}{\Large\bfseries\centering}}
-\def\subsection{\@startsection{subsection}{2}{\z@}{-1.5ex plus -0.25ex minus -0.2ex}{3pt plus 2pt minus 1pt}{\large\bfseries\raggedright}}
-\def\subsubsection{\@startsection{subsubsection}{3}{\z@}{-6pt plus 2pt minus 1pt}{-1em}{\normalsize\bfseries}}
+\def\section{\@startsection{section}{1}{\z@}{-9pt plus -2pt minus -1pt}{3pt plus 2pt minus 1pt}{\fontsize{12}{14}\selectfont\bfseries\centering}}
+\def\subsection{\@startsection{subsection}{2}{\z@}{-9pt plus -2pt minus -1pt}{3pt plus 2pt minus 1pt}{\fontsize{11}{13}\selectfont\bfseries\raggedright}}
+\def\subsubsection{\@startsection{subsubsection}{3}{\z@}{-9pt plus -2pt minus -1pt}{-1em}{\normalsize\bfseries}}
 \setcounter{secnumdepth}{0}
 
 \parindent 10pt
