@@ -149,6 +149,12 @@
 
 \RequirePackage{xurl}  % better URL line breaking
 \RequirePackage[style=apa,backend=biber,natbib=true,uniquename=false,uniquelist=false]{biblatex}
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map{\pertype{book}\step[fieldset=pages, null]}
+    \map{\pertype{incollection}\step[fieldset=pages, null]}
+  }
+}
 \DeclareFieldFormat{doi}{\url{https://doi.org/#1}}
 \setlength{\bibhang}{0.125in}
 \apptocmd{\bibsetup}{\emergencystretch=1em}{}{}  % prevent overflow in narrow columns
