@@ -34,12 +34,17 @@
 
 \@ccnsubmissiontrue
 
-\DeclareOption{preprint}{\@ccnpreprinttrue\@ccnsubmissionfalse\@ccnproceedingsfalse\@ccneafalse}
-\DeclareOption{submission}{\@ccnpreprintfalse\@ccnsubmissiontrue\@ccnproceedingsfalse\@ccneafalse}
-\DeclareOption{proceedings}{\@ccnpreprintfalse\@ccnsubmissionfalse\@ccnproceedingstrue\@ccneafalse}
-\DeclareOption{extended-abstract}{\@ccnpreprintfalse\@ccnsubmissionfalse\@ccnproceedingsfalse\@ccneatrue}
+\newcount\ccn@modecount
+\DeclareOption{preprint}{\@ccnpreprinttrue\@ccnsubmissionfalse\@ccnproceedingsfalse\@ccneafalse\advance\ccn@modecount\@ne}
+\DeclareOption{submission}{\@ccnpreprintfalse\@ccnsubmissiontrue\@ccnproceedingsfalse\@ccneafalse\advance\ccn@modecount\@ne}
+\DeclareOption{proceedings}{\@ccnpreprintfalse\@ccnsubmissionfalse\@ccnproceedingstrue\@ccneafalse\advance\ccn@modecount\@ne}
+\DeclareOption{extended-abstract}{\@ccnpreprintfalse\@ccnsubmissionfalse\@ccnproceedingsfalse\@ccneatrue\advance\ccn@modecount\@ne}
 \DeclareOption*{\ClassWarning{ccn}{Unknown option '\CurrentOption'}}
 \ProcessOptions\relax
+
+\ifnum\ccn@modecount>\@ne
+  \ClassError{ccn}{Conflicting mode options}{Pass at most one of: submission, preprint, proceedings, extended-abstract.}%
+\fi
 
 % Load base class
 \LoadClass[10pt,letterpaper]{article}
