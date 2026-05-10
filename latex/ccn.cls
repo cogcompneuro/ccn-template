@@ -164,21 +164,17 @@
 %% PAGE LAYOUT
 %% ============================================================================
 
-\newlength{\ccn@sidemargin}     \setlength{\ccn@sidemargin}{-0.25in}
-\newlength{\ccn@textwidth}      \setlength{\ccn@textwidth}{7in}
-\newlength{\ccn@textheight}     \setlength{\ccn@textheight}{8.75in}
-\newlength{\ccn@columnsep}      \setlength{\ccn@columnsep}{0.25in}
-\newlength{\ccn@footskip}       \setlength{\ccn@footskip}{36pt}
-
-\setlength\oddsidemargin{\ccn@sidemargin}
-\setlength\evensidemargin{\ccn@sidemargin}
-\setlength\textwidth{\ccn@textwidth}
-\setlength\textheight{\ccn@textheight}
-\setlength\columnsep{\ccn@columnsep}
-\setlength\headheight{0pt}
-\setlength\headsep{0pt}
-\setlength\footskip{\ccn@footskip}
-\setlength\topmargin{0in}
+\RequirePackage[
+  letterpaper,
+  textwidth=7in,
+  textheight=8.75in,
+  left=0.75in,
+  top=1in,
+  columnsep=0.25in,
+  footskip=36pt,
+  headheight=0pt,
+  headsep=0pt,
+]{geometry}
 
 % Allow flexible line breaking; for two-column layout.
 \tolerance=1000
