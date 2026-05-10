@@ -235,18 +235,20 @@
   \end{minipage}%
 }
 
+\def\@ccnsubmissionfooter{%
+  \begin{minipage}[b]{\textwidth}%
+    \setlength{\parindent}{0pt}\normalsize\textcolor{ccnfootertext}{\@ccnfootertext}%
+  \end{minipage}%
+}
+
 \fancypagestyle{ccnfirstpage}{%
   \fancyhf{}%
   \renewcommand{\headrulewidth}{0pt}%
   \renewcommand{\footrulewidth}{0pt}%
-  \if@ccnproceedings
-    \fancyfoot[L]{\@ccnofficialfooter}%
-  \fi
-  \if@ccnea
-    \fancyfoot[L]{\@ccnofficialfooter}%
-  \fi
   \if@ccnsubmission
-    \fancyfoot[L]{\begin{minipage}[b]{\textwidth}\setlength{\parindent}{0pt}\normalsize\textcolor{ccnfootertext}{\@ccnfootertext}\end{minipage}}%
+    \fancyfoot[L]{\@ccnsubmissionfooter}%
+  \else
+    \fancyfoot[L]{\@ccnofficialfooter}%
   \fi
 }
 
