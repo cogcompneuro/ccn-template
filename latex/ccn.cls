@@ -288,7 +288,7 @@
   {\fontsize{14}{16}\selectfont\bfseries \@title \par}
   \vskip 0.75em
   \if@ccnsubmission
-    {\large Anonymous Author(s)\par}
+    {\normalsize\bfseries Anonymous Author(s)\par}
   \else
     {\def\and{\unskip\enspace{\rmfamily and}\enspace}%
       \def\And{\end{tabular}\hss \egroup \hskip 0.5in plus 2fil
