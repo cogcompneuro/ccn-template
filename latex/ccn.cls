@@ -61,7 +61,11 @@
 \newcommand{\ccnedition}[1]{\renewcommand{\@ccnedition}{#1}}
 \newcommand{\ccnlocation}[1]{\renewcommand{\@ccnlocation}{#1}}
 
-\newcommand{\ccndoi}[1]{\def\@ccndoi{#1}}
+\newcommand{\ccndoi}[1]{%
+  \def\@tempa{#1}\def\@tempb{}%
+  \ifx\@tempa\@tempb \let\@ccndoi\@empty
+  \else \def\@ccndoi{#1}\fi
+}
 % License lookup using csname.
 \newcommand{\ccnlicense}[1]{%
   \renewcommand{\@ccnlicense}{#1}%
