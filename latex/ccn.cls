@@ -184,6 +184,9 @@
 \emergencystretch=1em
 \hbadness=1000
 
+\widowpenalty=10000
+\clubpenalty=10000
+
 \twocolumn
 \flushbottom
 
