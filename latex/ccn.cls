@@ -107,6 +107,7 @@
 \renewcommand{\familydefault}{\sfdefault}
 \RequirePackage{amsmath,amssymb}
 \RequirePackage[helvet]{sfmath}
+\RequirePackage{microtype}
 
 %% ============================================================================
 %% GRAPHICS AND COLORS
