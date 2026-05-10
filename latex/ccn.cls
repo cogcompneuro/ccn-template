@@ -323,7 +323,7 @@
 \def\subsubsection{\@startsection{subsubsection}{3}{\z@}{-9pt plus -2pt minus -1pt}{-1em}{\normalsize\bfseries}}
 \setcounter{secnumdepth}{0}
 
-\parindent 10pt
+\parindent 0.125in
 
 %% ============================================================================
 %% CAPTIONS
