@@ -349,8 +349,10 @@
 %% CAPTIONS
 %% ============================================================================
 
-\setlength\abovecaptionskip{12pt}
-\setlength\belowcaptionskip{12pt}
+\RequirePackage[
+  aboveskip=12pt,
+  belowskip=12pt,
+]{caption}
 
 %% ============================================================================
 %% LISTS
