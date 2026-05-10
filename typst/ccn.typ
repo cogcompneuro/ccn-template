@@ -297,7 +297,7 @@
       ]
       #v(7.5pt, weak: true)
       #if mode == "submission" {
-        align(center, text(size: 11pt)[Anonymous Author(s)])
+        align(center, text(weight: "bold")[Anonymous Author(s)])
       } else {
         _format-authors(authors, affiliations: affiliations, emails: emails)
       }
