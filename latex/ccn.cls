@@ -141,7 +141,7 @@
 \RequirePackage{xurl}  % better URL line breaking
 \RequirePackage[style=apa,backend=biber,natbib=true,uniquename=false,uniquelist=false]{biblatex}
 \DeclareFieldFormat{doi}{\url{https://doi.org/#1}}
-\setlength{\bibhang}{0.25in}
+\setlength{\bibhang}{0.125in}
 \apptocmd{\bibsetup}{\emergencystretch=1em}{}{}  % prevent overflow in narrow columns
 
 %% ============================================================================
