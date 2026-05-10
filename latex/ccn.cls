@@ -206,6 +206,7 @@
 \RequirePackage{hyperref}
 
 \hypersetup{colorlinks=true,linkcolor=black,urlcolor=ccnLinks,citecolor=black}
+\AtBeginDocument{\hypersetup{pdftitle={\@title}}}
 \if@ccnsubmission\hypersetup{pdfauthor={Anonymous}}\fi
 
 %% ============================================================================
