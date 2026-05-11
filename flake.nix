@@ -14,6 +14,10 @@
           inherit system;
           config.allowUnfree = true;
         };
+        fonts = with pkgs; [
+          tex-gyre.heros
+          liberation_ttf
+        ];
       in {
         devShells.${system}.default =
           pkgs.mkShell
@@ -26,6 +30,7 @@
               poppler-utils
               imagemagick
             ];
+            TYPST_FONT_PATHS = lib.concatMapStringsSep ":" (f: "${f}/share/fonts") fonts;
           };
       }
     );

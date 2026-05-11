@@ -222,24 +222,26 @@
     },
   )
   set columns(gutter: 0.25in)
-
-  // Body: 10pt sans-serif, 12pt baseline. Falls back through TeX Gyre Heros
-  // / Helvetica / Arial — matches ccn.cls's tgheros (Helvetica-compatible).
   set text(
     font: ("TeX Gyre Heros", "Helvetica", "Arial", "Liberation Sans"),
     size: 10pt,
     top-edge: "cap-height",
     bottom-edge: "descender",
     lang: "en",
+    costs: (hyphenation: 30%),
   )
   set par(
     justify: true,
     justification-limits: (
-      // Enable character-level justification
-      tracking: (min: -0.01em, max: 0.01em),
+      // Character-level justification
+      tracking: (min: -0.015em, max: 0.02em),
     ),
-    leading: 3.2pt,
-    spacing: 3.2pt,
+    // Targets LaTeX's 12pt baselineskip. With top-edge: "cap-height" and
+    // bottom-edge: "descender", each line's frame is ~0.925em tall (TeX Gyre
+    // Heros: cap-height 0.718 + descender 0.207), so leading 2.75pt yields
+    // 10pt × 0.925 + 2.75pt = 12pt baseline-to-baseline.
+    leading: 2.75pt,
+    spacing: 2.75pt,
     first-line-indent: (amount: 0.125in, all: false),
   )
   set par.line(
@@ -304,7 +306,7 @@
   set table(
     stroke: none,
     inset: (top: 0.35em, bottom: 0.35em),
-    gutter: 0,
+    gutter: 0pt,
   )
   show table.cell.where(y: 0): strong
 
@@ -322,7 +324,7 @@
         #set par(leading: 16pt - 14pt)
         #text(size: 14pt, weight: "bold")[#title]
       ]
-      #v(7.5pt, weak: true)
+      #v(7.5pt)
       #if mode == "submission" {
         align(center, text(weight: "bold")[Anonymous Author(s)])
       } else {
@@ -338,7 +340,7 @@
       #v(sec-below)
       #pad(left: 1em, right: 1em)[
         #set text(size: 9pt)
-        #set par(first-line-indent: 0pt, justify: true, leading: 2.6pt, spacing: 2.6pt)
+        #set par(first-line-indent: 0pt, justify: true, leading: 2.675pt, spacing: 2.675pt)
         #abstract
       ]
     ]
