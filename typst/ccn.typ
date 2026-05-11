@@ -234,34 +234,52 @@
   )
   set par(
     justify: true,
+    justification-limits: (
+      // Enable character-level justification
+      tracking: (min: -0.01em, max: 0.01em),
+    ),
     leading: 3.2pt,
     spacing: 3.2pt,
     first-line-indent: (amount: 0.125in, all: false),
   )
+  set par.line(
+    numbering: n => text(size: 6pt)[#n],
+    number-clearance: 6pt,
+  )
 
-  // Heading spacings — same target as v2026.1 LaTeX: 12pt actual rendered
-  // space above each heading ("one line space above" per body-text spec).
-  let sec-above = 12pt
+  // Heading spacings — match v2026.1 LaTeX (`\@startsection` uses 9pt
+  // above-skip on §/§§/§§§). The body-text spec says "one line space
+  // above" (12pt), but LaTeX deviates to 9pt. This tries to match that
+  // behavior.
+  let sec-above = 9pt
   let sec-below = 3pt
 
+  // Heading show rules must return an explicit `block(...)` (not bare
+  // content with `set block(...)` in scope). When the rule returns inline
+  // content like `align(center, it.body)`, Typst's column flow doesn't
+  // register the heading as a layout change, and `par.first-line-indent`
+  // with `all: false` flips: every paragraph gets indented instead of being
+  // skipped after the heading.
   show heading.where(level: 1): it => {
-    set block(above: sec-above, below: sec-below)
-    set text(size: 12pt, weight: "bold")
-    align(center, it.body)
+    block(above: sec-above, below: sec-below, width: 100%)[
+      #set text(size: 12pt, weight: "bold")
+      #align(center, it.body)
+    ]
   }
   show heading.where(level: 2): it => {
-    set block(above: sec-above, below: sec-below)
-    set text(size: 11pt, weight: "bold")
-    it.body
+    block(above: sec-above, below: sec-below, width: 100%)[
+      #set text(size: 11pt, weight: "bold")
+      #it.body
+    ]
   }
   show heading.where(level: 3): it => {
-    // Run-in heading (matches ccn.cls afterskip = -1em).
-    set block(above: sec-above, below: 0pt, sticky: true)
-    set text(size: 10pt, weight: "bold")
-    it.body + h(0.5em, weak: false)
+    h(-0.125in)
+    text(size: 10pt, weight: "bold", it.body)
   }
-
   set heading(numbering: none)
+
+  // Equation numbers
+  set math.equation(numbering: "(1)")
 
   // Figures + tables: caption above + below = 12pt per spec.
   set figure(numbering: "1", placement: top)
@@ -281,6 +299,15 @@
       it
     }
   }
+
+  // Latex-style tables
+  set table(
+    stroke: none,
+    inset: (top: 0.35em, bottom: 0.35em),
+    gutter: 0,
+  )
+  show table.cell.where(y: 0): strong
+
 
   // Title block — spans both columns.
   //   Title: 14pt bold.
@@ -308,7 +335,7 @@
   if abstract != none {
     block(width: 100%, above: 0pt, below: 6pt, breakable: true)[
       #align(center)[#text(size: 10pt, weight: "bold")[Abstract]]
-      #v(sec-below, weak: true)
+      #v(sec-below)
       #pad(left: 1em, right: 1em)[
         #set text(size: 9pt)
         #set par(first-line-indent: 0pt, justify: true, leading: 2.6pt, spacing: 2.6pt)

@@ -95,7 +95,6 @@ Leave one line space above the heading and 1/4~line space below the heading.
 
 
 === Third Level Headings
-
 Third level headings should be 10~point, initial caps, bold, and flush left.
 Leave one line space above the heading, but no space after the heading.
 
