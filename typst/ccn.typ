@@ -209,16 +209,30 @@
 
   // Page layout — matches the LaTeX `geometry` settings from v2026.1:
   //   letter, textwidth 7", textheight 8.75" (page 1), 0.75" left, 1" top.
+  // The page-1 branded footer renders in the page footer slot (inside the
+  // bottom margin) rather than as a body float — that keeps it out of the
+  // way of figure floats with `placement: bottom`.
   set page(
     paper: "us-letter",
     margin: (left: 0.75in, right: 0.75in, top: 1in, bottom: 0.75in),
+    // Approximate ccn.cls `\footskip 30pt` (baseline-to-baseline from last
+    // body line to footer); Typst's footer-descent is body-bottom-to-footer-top.
+    footer-descent: 21pt,
     columns: 2,
     numbering: if mode == "preprint" { none } else { "1" },
     number-align: center,
     footer: context {
       if mode == "preprint" { return [] }
       let n = counter(page).get().first()
-      if n == 1 { [] } else { align(center, text(size: 9pt)[#n]) }
+      if n == 1 {
+        // ccn.cls's page-1 layout uses an 8.75" body + footskip 36pt, leaving
+        // a 1.25" bottom margin; we use the spec 9.25" body, so push the
+        // page-1 footer up to compensate.
+        v(-21pt)
+        _first-page-footer(mode, year, edition, location, doi, license, license-url)
+      } else {
+        align(center, text(size: 9pt)[#n])
+      }
     },
   )
   set columns(gutter: 0.25in)
@@ -275,23 +289,46 @@
     ]
   }
   show heading.where(level: 3): it => {
+    v(sec-above, weak: true)
     h(-0.125in)
     text(size: 10pt, weight: "bold", it.body)
+    h(0.5em)
   }
   set heading(numbering: none)
 
-  // Equation numbers
   set math.equation(numbering: "(1)")
 
-  // Figures + tables: caption above + below = 12pt per spec.
-  set figure(numbering: "1", placement: top)
+  // Figures
+  set figure(numbering: "1")
   show figure: set block(above: 12pt, below: 12pt)
   show figure.caption: it => {
     set par(first-line-indent: 0pt, justify: true)
     set text(size: 10pt)
     [#it.supplement #context it.counter.display(it.numbering): #it.body]
   }
+
+  // Tables
   show figure.where(kind: table): set figure.caption(position: top)
+  set table(
+    stroke: none,
+    inset: (top: 0.2em, bottom: 0.2em),
+    gutter: 0pt,
+  )
+  show table.cell.where(y: 0): strong
+
+  // Footnotes — match ccn.cls:
+  //   \footnotesep 6.65pt           → gap between footnotes
+  //   \skip\footins 9pt             → space from body to rule
+  //   \footnoterule width 5pc       → 60pt-wide horizontal rule
+  //   9pt text per spec
+  set footnote.entry(
+    separator: line(length: 60pt, stroke: 0.5pt),
+    clearance: 9pt,
+    gap: 6.65pt,
+    indent: 0pt,
+  )
+  show footnote.entry: set text(size: 9pt)
+
 
   // Links + citations.
   show link: it => {
@@ -301,15 +338,6 @@
       it
     }
   }
-
-  // Latex-style tables
-  set table(
-    stroke: none,
-    inset: (top: 0.35em, bottom: 0.35em),
-    gutter: 0pt,
-  )
-  show table.cell.where(y: 0): strong
-
 
   // Title block — spans both columns.
   //   Title: 14pt bold.
@@ -350,18 +378,20 @@
   set bibliography(title: "References", style: "apa")
   show bibliography: set par(hanging-indent: 0.125in, first-line-indent: 0pt)
 
-  // Page-1 branded footer (in-body float so it consumes the same 0.5" body
-  // capacity that ccn.cls's AtBeginShipoutNext reserves on page 1).
+  // Partially mirror ccn.cls's page-1 quirk (textheight 8.75" on page 1,
+  // 9.25" on page 2+) by reserving body capacity at the bottom of page 1.
+  // Empirically 0.25" is the largest reservation that still leaves room for
+  // a Math display equation at the bottom of column 2 — a full 0.5"
+  // reservation (matching ccn.cls exactly) pushes such equations off page
+  // 1, since Typst fits ~3 fewer text lines per column than LaTeX does on
+  // the same body area due to line-breaking algorithm differences.
   if mode != "preprint" {
     place(
       bottom + left,
       scope: "parent",
       float: true,
       clearance: 0pt,
-      block(width: 100%, height: 0.5in)[
-        #set align(bottom)
-        #_first-page-footer(mode, year, edition, location, doi, license, license-url)
-      ],
+      block(width: 100%, height: 0.25in),
     )
   }
 

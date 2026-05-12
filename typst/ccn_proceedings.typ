@@ -120,23 +120,27 @@ the table with one line space above the caption and one line space below it, as
 in @sample-table. You may float tables to the top or bottom of a column, or set
 wide tables across both columns.
 
-#figure(
-  table(
-    columns: 2,
-    align: left,
-    stroke: none,
-    table.hline(),
-    [*Error type*], [*Example*],
-    table.hline(),
-    [Take smaller], [63 - 44 = 21],
-    [Always borrow], [96 - 42 = 34],
-    [0 - N = N], [70 - 47 = 37],
-    [0 - N = 0], [70 - 47 = 30],
-    table.hline(),
-  ),
-  caption: [Sample table title.],
-  scope: "parent",
-) <sample-table>
+#let sample-table = [ 
+  #figure(
+    table(
+      columns: 2,
+      align: left,
+      stroke: none,
+      table.hline(),
+      [*Error type*], [*Example*],
+      table.hline(),
+      [Take smaller], [63 - 44 = 21],
+      [Always borrow], [96 - 42 = 34],
+      [0 - N = N], [70 - 47 = 37],
+      [0 - N = 0], [70 - 47 = 30],
+      table.hline(),
+    ),
+    caption: [Sample table title.],
+    scope: "parent",
+    placement: auto,
+  )<sample-table> 
+]
+
 
 
 == Figures
@@ -152,6 +156,7 @@ column, or set wide figures across both columns.
 #figure(
   rect(width: 4cm, height: 4cm, stroke: 0.5pt),
   caption: [This is a figure spanning a single column.],
+  placement: auto,
 ) <sample-figure>
 
 #figure(
@@ -161,6 +166,9 @@ column, or set wide figures across both columns.
   scope: "parent",
 ) <sample-figure-wide>
 
+// Note: sample-table is defined above, but instantiating it here forces
+// it to appear on the second page.
+#sample-table
 
 == Math
 
