@@ -67,7 +67,7 @@
   </g>
 </svg>"
 
-#let ccn-logo(size: 1.5em) = box(image(bytes(ccn-logo-svg), format: "svg", height: size))
+#let ccn-logo(size: 2.8em) = box(image(bytes(ccn-logo-svg), format: "svg", height: size))
 
 // ----------------------------------------------------------------------------
 // Footer text + first-page branded footer assembly.
@@ -103,7 +103,7 @@
       columns: (auto, 1fr),
       column-gutter: 0.7em,
       align: (horizon + left, horizon + left),
-      ccn-logo(size: 1.6em),
+      ccn-logo(),
       txt,
     )
   } else {
