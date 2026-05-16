@@ -319,6 +319,8 @@
 %% FOOTNOTES
 %% ============================================================================
 
+% CCN requires 9pt footnotes (the article 10pt default \footnotesize is 8pt).
+\renewcommand\footnotesize{\fontsize{9}{11}\selectfont}
 \footnotesep 6.65pt
 \skip\footins 9pt plus 4pt minus 2pt
 \def\footnoterule{\kern-3pt \hrule width 5pc \kern 2.6pt}
