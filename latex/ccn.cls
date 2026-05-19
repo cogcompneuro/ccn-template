@@ -18,10 +18,10 @@
 %   Modified : Konrad Kording (koerding@gmail.com)     02/15/2017
 %   Modified : Thomas Naselaris (tnaselar@gmail.com)   03/18/2022
 %   Modified : Sneha Aenugu & Jasper van den Bosch     18/12/2024
-%   Modified : Erin Grant                                   v2026.0
+%   Modified : Erin Grant                                   v2026.1
 
 \NeedsTeXFormat{LaTeX2e}[2020/10/01]
-\ProvidesClass{ccn}[v2026.0 CCN Conference Document Class]
+\ProvidesClass{ccn}[v2026.1 CCN Conference Document Class]
 
 %% ============================================================================
 %% VERSION OPTIONS
@@ -31,15 +31,22 @@
 \newif\if@ccnsubmission
 \newif\if@ccnproceedings
 \newif\if@ccnea
+\newif\if@ccnflushbottom
 
 \@ccnsubmissiontrue
 
-\DeclareOption{preprint}{\@ccnpreprinttrue\@ccnsubmissionfalse\@ccnproceedingsfalse\@ccneafalse}
-\DeclareOption{submission}{\@ccnpreprintfalse\@ccnsubmissiontrue\@ccnproceedingsfalse\@ccneafalse}
-\DeclareOption{proceedings}{\@ccnpreprintfalse\@ccnsubmissionfalse\@ccnproceedingstrue\@ccneafalse}
-\DeclareOption{extended-abstract}{\@ccnpreprintfalse\@ccnsubmissionfalse\@ccnproceedingsfalse\@ccneatrue}
+\newcount\ccn@modecount
+\DeclareOption{preprint}{\@ccnpreprinttrue\@ccnsubmissionfalse\@ccnproceedingsfalse\@ccneafalse\advance\ccn@modecount\@ne}
+\DeclareOption{submission}{\@ccnpreprintfalse\@ccnsubmissiontrue\@ccnproceedingsfalse\@ccneafalse\advance\ccn@modecount\@ne}
+\DeclareOption{proceedings}{\@ccnpreprintfalse\@ccnsubmissionfalse\@ccnproceedingstrue\@ccneafalse\advance\ccn@modecount\@ne}
+\DeclareOption{extended-abstract}{\@ccnpreprintfalse\@ccnsubmissionfalse\@ccnproceedingsfalse\@ccneatrue\advance\ccn@modecount\@ne}
+\DeclareOption{flushbottom}{\@ccnflushbottomtrue}
 \DeclareOption*{\ClassWarning{ccn}{Unknown option '\CurrentOption'}}
 \ProcessOptions\relax
+
+\ifnum\ccn@modecount>\@ne
+  \ClassError{ccn}{Conflicting mode options}{Pass at most one of: submission, preprint, proceedings, extended-abstract.}%
+\fi
 
 % Load base class
 \LoadClass[10pt,letterpaper]{article}
@@ -61,7 +68,11 @@
 \newcommand{\ccnedition}[1]{\renewcommand{\@ccnedition}{#1}}
 \newcommand{\ccnlocation}[1]{\renewcommand{\@ccnlocation}{#1}}
 
-\newcommand{\ccndoi}[1]{\def\@ccndoi{#1}}
+\newcommand{\ccndoi}[1]{%
+  \def\@tempa{#1}\def\@tempb{}%
+  \ifx\@tempa\@tempb \let\@ccndoi\@empty
+  \else \def\@ccndoi{#1}\fi
+}
 % License lookup using csname.
 \newcommand{\ccnlicense}[1]{%
   \renewcommand{\@ccnlicense}{#1}%
@@ -98,6 +109,7 @@
 \renewcommand{\familydefault}{\sfdefault}
 \RequirePackage{amsmath,amssymb}
 \RequirePackage[helvet]{sfmath}
+\RequirePackage{microtype}
 
 %% ============================================================================
 %% GRAPHICS AND COLORS
@@ -140,37 +152,46 @@
 
 \RequirePackage{xurl}  % better URL line breaking
 \RequirePackage[style=apa,backend=biber,natbib=true,uniquename=false,uniquelist=false]{biblatex}
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map{\pertype{book}\step[fieldset=pages, null]}
+    \map{\pertype{incollection}\step[fieldset=pages, null]}
+  }
+}
 \DeclareFieldFormat{doi}{\url{https://doi.org/#1}}
-\setlength{\bibhang}{0.25in}
+\setlength{\bibhang}{0.125in}
 \apptocmd{\bibsetup}{\emergencystretch=1em}{}{}  % prevent overflow in narrow columns
 
 %% ============================================================================
 %% PAGE LAYOUT
 %% ============================================================================
 
-\newlength{\ccn@sidemargin}     \setlength{\ccn@sidemargin}{-0.25in}
-\newlength{\ccn@textwidth}      \setlength{\ccn@textwidth}{7in}
-\newlength{\ccn@textheight}     \setlength{\ccn@textheight}{8.75in}
-\newlength{\ccn@columnsep}      \setlength{\ccn@columnsep}{0.25in}
-\newlength{\ccn@footskip}       \setlength{\ccn@footskip}{36pt}
-
-\setlength\oddsidemargin{\ccn@sidemargin}
-\setlength\evensidemargin{\ccn@sidemargin}
-\setlength\textwidth{\ccn@textwidth}
-\setlength\textheight{\ccn@textheight}
-\setlength\columnsep{\ccn@columnsep}
-\setlength\headheight{0pt}
-\setlength\headsep{0pt}
-\setlength\footskip{\ccn@footskip}
-\setlength\topmargin{0in}
+\RequirePackage[
+  letterpaper,
+  textwidth=7in,
+  textheight=8.75in,
+  left=0.75in,
+  top=1in,
+  columnsep=0.25in,
+  footskip=36pt,
+  headheight=0pt,
+  headsep=0pt,
+]{geometry}
 
 % Allow flexible line breaking; for two-column layout.
 \tolerance=1000
 \emergencystretch=1em
 \hbadness=1000
 
+\widowpenalty=10000
+\clubpenalty=10000
+
 \twocolumn
-\flushbottom
+
+% Word does not vertically justify columns, so default to \raggedbottom to keep
+% LaTeX output visually aligned with the Word template. Pass the `flushbottom`
+% class option to restore column-height justification.
+\if@ccnflushbottom\flushbottom\else\raggedbottom\fi
 
 %% ============================================================================
 %% LINE NUMBERS (submission mode only)
@@ -191,6 +212,7 @@
 \RequirePackage{hyperref}
 
 \hypersetup{colorlinks=true,linkcolor=black,urlcolor=ccnLinks,citecolor=black}
+\AtBeginDocument{\hypersetup{pdftitle={\@title}}}
 \if@ccnsubmission\hypersetup{pdfauthor={Anonymous}}\fi
 
 %% ============================================================================
@@ -215,18 +237,20 @@
   \end{minipage}%
 }
 
+\def\@ccnsubmissionfooter{%
+  \begin{minipage}[b]{\textwidth}%
+    \setlength{\parindent}{0pt}\normalsize\textcolor{ccnfootertext}{\@ccnfootertext}%
+  \end{minipage}%
+}
+
 \fancypagestyle{ccnfirstpage}{%
   \fancyhf{}%
   \renewcommand{\headrulewidth}{0pt}%
   \renewcommand{\footrulewidth}{0pt}%
-  \if@ccnproceedings
-    \fancyfoot[L]{\@ccnofficialfooter}%
-  \fi
-  \if@ccnea
-    \fancyfoot[L]{\@ccnofficialfooter}%
-  \fi
   \if@ccnsubmission
-    \fancyfoot[L]{\begin{minipage}[b]{\textwidth}\setlength{\parindent}{0pt}\normalsize\textcolor{ccnfootertext}{\@ccnfootertext}\end{minipage}}%
+    \fancyfoot[L]{\@ccnsubmissionfooter}%
+  \else
+    \fancyfoot[L]{\@ccnofficialfooter}%
   \fi
 }
 
@@ -248,7 +272,7 @@
 
 \newcounter{ccn@affcount}
 \newcommand{\@ccnaffiliations}{}
-\newcommand{\affmark}[1]{\textsuperscript{\scriptsize #1}}
+\newcommand{\affmark}[1]{\textsuperscript{#1}}
 \newcommand{\affiliation}[2]{%
   \g@addto@macro\@ccnaffiliations{\par\affmark{#1}\,#2}%
 }
@@ -267,10 +291,10 @@
 \def\@maketitle{%
   \linewidth\hsize
   \centering
-  {\LARGE\bfseries \@title \par}
+  {\fontsize{14}{16}\selectfont\bfseries \@title \par}
   \vskip 0.75em
   \if@ccnsubmission
-    {\large Anonymous Author(s)\par}
+    {\normalsize\bfseries Anonymous Author(s)\par}
   \else
     {\def\and{\unskip\enspace{\rmfamily and}\enspace}%
       \def\And{\end{tabular}\hss \egroup \hskip 0.5in plus 2fil
@@ -294,13 +318,15 @@
         {\small\texttt{\@ccnemails}\par}%
     \fi
   \fi
-  \vskip 1.5em
+  \vskip 24pt
 }
 
 %% ============================================================================
 %% FOOTNOTES
 %% ============================================================================
 
+% CCN requires 9pt footnotes (the article 10pt default \footnotesize is 8pt).
+\renewcommand\footnotesize{\fontsize{9}{11}\selectfont}
 \footnotesep 6.65pt
 \skip\footins 9pt plus 4pt minus 2pt
 \def\footnoterule{\kern-3pt \hrule width 5pc \kern 2.6pt}
@@ -318,12 +344,21 @@
 %% SECTIONS
 %% ============================================================================
 
-\def\section{\@startsection{section}{1}{\z@}{-1.5ex plus -0.25ex minus -0.2ex}{3pt plus 2pt minus 1pt}{\Large\bfseries\centering}}
-\def\subsection{\@startsection{subsection}{2}{\z@}{-1.5ex plus -0.25ex minus -0.2ex}{3pt plus 2pt minus 1pt}{\large\bfseries\raggedright}}
-\def\subsubsection{\@startsection{subsubsection}{3}{\z@}{-6pt plus 2pt minus 1pt}{-1em}{\normalsize\bfseries}}
+\def\section{\@startsection{section}{1}{\z@}{-9pt plus -2pt minus -1pt}{3pt plus 2pt minus 1pt}{\fontsize{12}{14}\selectfont\bfseries\centering}}
+\def\subsection{\@startsection{subsection}{2}{\z@}{-9pt plus -2pt minus -1pt}{3pt plus 2pt minus 1pt}{\fontsize{11}{13}\selectfont\bfseries\raggedright}}
+\def\subsubsection{\@startsection{subsubsection}{3}{\z@}{-9pt plus -2pt minus -1pt}{-1em}{\normalsize\bfseries}}
 \setcounter{secnumdepth}{0}
 
-\parindent 10pt
+\parindent 0.125in
+
+%% ============================================================================
+%% CAPTIONS
+%% ============================================================================
+
+\RequirePackage[
+  aboveskip=12pt,
+  belowskip=12pt,
+]{caption}
 
 %% ============================================================================
 %% LISTS
