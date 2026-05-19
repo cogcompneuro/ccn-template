@@ -31,6 +31,7 @@
 \newif\if@ccnsubmission
 \newif\if@ccnproceedings
 \newif\if@ccnea
+\newif\if@ccnflushbottom
 
 \@ccnsubmissiontrue
 
@@ -39,6 +40,7 @@
 \DeclareOption{submission}{\@ccnpreprintfalse\@ccnsubmissiontrue\@ccnproceedingsfalse\@ccneafalse\advance\ccn@modecount\@ne}
 \DeclareOption{proceedings}{\@ccnpreprintfalse\@ccnsubmissionfalse\@ccnproceedingstrue\@ccneafalse\advance\ccn@modecount\@ne}
 \DeclareOption{extended-abstract}{\@ccnpreprintfalse\@ccnsubmissionfalse\@ccnproceedingsfalse\@ccneatrue\advance\ccn@modecount\@ne}
+\DeclareOption{flushbottom}{\@ccnflushbottomtrue}
 \DeclareOption*{\ClassWarning{ccn}{Unknown option '\CurrentOption'}}
 \ProcessOptions\relax
 
@@ -185,7 +187,11 @@
 \clubpenalty=10000
 
 \twocolumn
-\flushbottom
+
+% Word does not vertically justify columns, so default to \raggedbottom to keep
+% LaTeX output visually aligned with the Word template. Pass the `flushbottom`
+% class option to restore column-height justification.
+\if@ccnflushbottom\flushbottom\else\raggedbottom\fi
 
 %% ============================================================================
 %% LINE NUMBERS (submission mode only)
