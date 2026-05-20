@@ -47,14 +47,6 @@
 )
 
 
-#figure(
-  rect(width: 12cm, height: 4cm, stroke: 0.5pt),
-  caption: [This is a figure spanning both columns.],
-  placement: top,
-  scope: "parent",
-) <sample-figure-wide>
-
-
 = General Formatting Instructions
 
 The text, tables and figures of a CCN extended abstract submission can be no
@@ -158,6 +150,13 @@ column, or set wide figures across both columns.
   rect(width: 4cm, height: 4cm, stroke: 0.5pt),
   caption: [This is a figure spanning a single column.],
 ) <sample-figure>
+
+#figure(
+  rect(width: 12cm, height: 4cm, stroke: 0.5pt),
+  caption: [This is a figure spanning both columns.],
+  placement: bottom,
+  scope: "parent",
+) <sample-figure-wide>
 
 
 == Math
