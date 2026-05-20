@@ -101,7 +101,7 @@ Leave one line space above the heading, but no space after the heading.
 
 = Formalities, Footnotes, and Floats
 
-Use standard APA citation format. Citations within the text should include the
+Use standard APA 7 citation format. Citations within the text should include the
 author's last name and year. If the authors' names are included in the sentence,
 place only the year in parentheses, as in #cite(<NewellSimon1972a>, form: "prose"),
 but otherwise place the entire reference in parentheses with the authors and year
@@ -198,7 +198,7 @@ review linked material.
 
 = Referencing Prior Work
 
-Follow the APA Publication Manual for citation format, both within the text and
+Follow the APA 7 Publication Manual for citation format, both within the text and
 in the reference list, with the following exceptions: (a) do not cite the page
 numbers of any book, including chapters in edited volumes; (b) use the same
 format for unpublished references as for published ones. Alphabetize references
