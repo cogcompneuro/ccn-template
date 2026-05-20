@@ -4,7 +4,7 @@
 % See ../CHANGELOG.md for version history.
 
 \NeedsTeXFormat{LaTeX2e}[2020/10/01]
-\ProvidesClass{ccn}[v2026.1 CCN Conference Document Class]
+\ProvidesClass{ccn}[v2026.2 CCN Conference Document Class]
 
 %% ============================================================================
 %% VERSION OPTIONS

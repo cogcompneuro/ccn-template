@@ -2,6 +2,10 @@
 
 ## 2026
 
+### v2026.2
+
+- Modifications (Erin Grant)
+
 ### v2026.1
 
 - Modifications (Erin Grant)
