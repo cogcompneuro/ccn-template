@@ -255,8 +255,20 @@
     },
   )
   set columns(gutter: 0.25in)
+
+  // Body: 10pt sans-serif, 12pt baseline. Falls back through TeX Gyre Heros
+  // / Helvetica / Arial — matches ccn.cls's tgheros (Helvetica-compatible).
+  // DejaVu / Noto Sans are listed last to keep headless Linux out of Typst's
+  // built-in serif fallback (Linux Libertine) when nothing else matches.
   set text(
-    font: ("TeX Gyre Heros", "Helvetica", "Arial", "Liberation Sans"),
+    font: (
+      "TeX Gyre Heros",
+      "Helvetica",
+      "Arial",
+      "Liberation Sans",
+      "DejaVu Sans",
+      "Noto Sans",
+    ),
     size: 10pt,
     top-edge: "cap-height",
     bottom-edge: "descender",
