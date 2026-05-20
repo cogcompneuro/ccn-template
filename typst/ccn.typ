@@ -327,6 +327,19 @@
   }
   set heading(numbering: none)
 
+  // Math: render Roman letters and digits in the body sans-serif, matching
+  // the LaTeX template's `\RequirePackage[helvet]{sfmath}`. Math operators
+  // and Greek glyphs fall through to Typst's bundled serif `New Computer
+  // Modern Math`, mirroring sfmath's mix of Helvetica letters + CM symbols.
+  show math.equation: set text(font: (
+    "TeX Gyre Heros",
+    "Helvetica",
+    "Arial",
+    "Liberation Sans",
+    "DejaVu Sans",
+    "Noto Sans",
+    "New Computer Modern Math",
+  ))
   set math.equation(numbering: "(1)")
 
   // Figures
