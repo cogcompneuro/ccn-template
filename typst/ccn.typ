@@ -181,7 +181,7 @@
       \
       #v(0.25em, weak: true)
       #set text(size: 9pt)
-      #raw(if type(emails) == array { emails.join(", ") } else { emails })
+      #if type(emails) == array { emails.join(", ") } else { emails }
     ]
   ]
 }
