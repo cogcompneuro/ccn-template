@@ -1,24 +1,7 @@
 % CCN Conference Document Class
 % ==============================
 %
-% VERSION HISTORY:
-%   Original : P.F. Patel-Schneider and other for IJCAI-89, AAAI-90, COGSCI-91
-%   Modified : Ashwin Ram (ashwin@cc.gatech.edu)       04/01/1994
-%   Modified : Johanna Moore (jmoore@cs.pitt.edu)      03/17/1995
-%   Modified : David Noelle (noelle@ucsd.edu)          03/15/1996
-%   Modified : Pat Langley (langley@cs.stanford.edu)   01/26/1997
-%   Latex2e corrections by Ramin Charles Nakisa        01/28/1997
-%   Modified : Tina Eliassi-Rad (eliassi@cs.wisc.edu)  01/31/1998
-%   Modified : Trisha Yannuzzi (trisha@ircs.upenn.edu) 12/28/1999
-%   Modified : Mary Ellen Foster (M.E.Foster@ed.ac.uk) 12/11/2000
-%   Modified : Ken Forbus                              01/23/2004
-%   Modified : Eli M. Silk (esilk@pitt.edu)            05/24/2005
-%   Modified : Niels Taatgen (taatgen@cmu.edu)         10/24/2006
-%   Modified : David Noelle (dnoelle@ucmerced.edu)     11/19/2014
-%   Modified : Konrad Kording (koerding@gmail.com)     02/15/2017
-%   Modified : Thomas Naselaris (tnaselar@gmail.com)   03/18/2022
-%   Modified : Sneha Aenugu & Jasper van den Bosch     18/12/2024
-%   Modified : Erin Grant                                   v2026.1
+% See ../CHANGELOG.md for version history.
 
 \NeedsTeXFormat{LaTeX2e}[2020/10/01]
 \ProvidesClass{ccn}[v2026.1 CCN Conference Document Class]
