@@ -14,6 +14,7 @@
 \newif\if@ccnsubmission
 \newif\if@ccnproceedings
 \newif\if@ccnea
+\newif\if@ccnflushbottom
 
 \@ccnsubmissiontrue
 
@@ -22,6 +23,7 @@
 \DeclareOption{submission}{\@ccnpreprintfalse\@ccnsubmissiontrue\@ccnproceedingsfalse\@ccneafalse\advance\ccn@modecount\@ne}
 \DeclareOption{proceedings}{\@ccnpreprintfalse\@ccnsubmissionfalse\@ccnproceedingstrue\@ccneafalse\advance\ccn@modecount\@ne}
 \DeclareOption{extended-abstract}{\@ccnpreprintfalse\@ccnsubmissionfalse\@ccnproceedingsfalse\@ccneatrue\advance\ccn@modecount\@ne}
+\DeclareOption{flushbottom}{\@ccnflushbottomtrue}
 \DeclareOption*{\ClassWarning{ccn}{Unknown option '\CurrentOption'}}
 \ProcessOptions\relax
 
@@ -168,7 +170,11 @@
 \clubpenalty=10000
 
 \twocolumn
-\flushbottom
+
+% Word does not vertically justify columns, so default to \raggedbottom to keep
+% LaTeX output visually aligned with the Word template. Pass the `flushbottom`
+% class option to restore column-height justification.
+\if@ccnflushbottom\flushbottom\else\raggedbottom\fi
 
 %% ============================================================================
 %% LINE NUMBERS (submission mode only)
@@ -302,6 +308,8 @@
 %% FOOTNOTES
 %% ============================================================================
 
+% CCN requires 9pt footnotes (the article 10pt default \footnotesize is 8pt).
+\renewcommand\footnotesize{\fontsize{9}{11}\selectfont}
 \footnotesep 6.65pt
 \skip\footins 9pt plus 4pt minus 2pt
 \def\footnoterule{\kern-3pt \hrule width 5pc \kern 2.6pt}
