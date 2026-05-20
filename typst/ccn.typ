@@ -59,7 +59,7 @@
 // CCN logo (inline SVG; three-circle Venn with lens-shape intersections).
 // ----------------------------------------------------------------------------
 
-#let ccn-logo-svg = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='-0.45 -0.45 0.9 0.9'>
+#let ccn-logo-svg = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='-0.3756 -0.3225 0.7512 0.7175'>
   <defs>
     <clipPath id='A'><circle cx='-0.1256' cy='-0.0725' r='0.25'/></clipPath>
     <clipPath id='B'><circle cx='0.1256' cy='-0.0725' r='0.25'/></clipPath>
@@ -79,7 +79,10 @@
   </g>
 </svg>"
 
-#let ccn-logo(size: 2.8em) = box(image(bytes(ccn-logo-svg), format: "svg", height: size))
+// Default size matches ccn.cls's TikZ \ccnlogo: \radius=0.25cm + \sep=0.145cm
+// → bounding box 0.7512cm wide × 0.7175cm tall. Using cm rather than em pins
+// the glyph to LaTeX's physical size regardless of the surrounding font size.
+#let ccn-logo(size: 0.7175cm) = box(image(bytes(ccn-logo-svg), format: "svg", height: size))
 
 // ----------------------------------------------------------------------------
 // Footer text + first-page branded footer assembly.
@@ -113,7 +116,7 @@
   if mode == "proceedings" or mode == "extended-abstract" {
     grid(
       columns: (auto, 1fr),
-      column-gutter: 0.7em,
+      column-gutter: 0.8em,
       align: (horizon + left, horizon + left),
       ccn-logo(),
       txt,
@@ -244,11 +247,19 @@
       if mode == "preprint" { return [] }
       let n = counter(page).get().first()
       if n == 1 {
-        // ccn.cls's page-1 layout uses an 8.75" body + footskip 36pt, leaving
-        // a 1.25" bottom margin; we use the spec 9.25" body, so push the
-        // page-1 footer up to compensate.
-        v(-21pt)
-        _first-page-footer(mode, year, edition, location, doi, license, license-url)
+        // Pad to a uniform 22pt height (2 lines + a touch) and align the
+        // payload to the *bottom* so submission (1-line) and cam-ready
+        // (2-line + logo) footers share the same bottom y — matching how
+        // ccn.cls pins `\footskip` to the bottom margin regardless of how
+        // many lines the footer wraps to.
+        v(-41pt)
+        block(
+          height: 22pt,
+          align(
+            bottom + left,
+            _first-page-footer(mode, year, edition, location, doi, license, license-url),
+          ),
+        )
       } else {
         align(center, text(size: 9pt)[#n])
       }
@@ -422,20 +433,17 @@
   set bibliography(title: "References", style: "apa")
   show bibliography: set par(hanging-indent: 0.125in, first-line-indent: 0pt)
 
-  // Partially mirror ccn.cls's page-1 quirk (textheight 8.75" on page 1,
-  // 9.25" on page 2+) by reserving body capacity at the bottom of page 1.
-  // Empirically 0.25" is the largest reservation that still leaves room for
-  // a Math display equation at the bottom of column 2 — a full 0.5"
-  // reservation (matching ccn.cls exactly) pushes such equations off page
-  // 1, since Typst fits ~3 fewer text lines per column than LaTeX does on
-  // the same body area due to line-breaking algorithm differences.
+  // Mirror ccn.cls's page-1 quirk (textheight 8.75" on page 1, 9.25" on
+  // page 2+) by reserving 0.5" of body capacity at the bottom of page 1 —
+  // matching `\AtBeginShipoutNext{\textheight=9.25in, footskip=30pt}` in
+  // ccn.cls so Typst and LaTeX authors get the same effective page-1 budget.
   if mode != "preprint" {
     place(
       bottom + left,
       scope: "parent",
       float: true,
       clearance: 0pt,
-      block(width: 100%, height: 0.25in),
+      block(width: 100%, height: 0.5in),
     )
   }
 
