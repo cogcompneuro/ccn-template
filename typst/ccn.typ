@@ -13,6 +13,18 @@
 
 #let ccn-version = "v2026.2"
 
+// Recursively extract plain text from content, so things like
+// `title: [Bayesian *Inference* in $X$]` can populate PDF metadata
+// without losing markup at the rendering site. Strings pass through.
+#let _content-to-string(c) = {
+  if c == none { "" }
+  else if type(c) == str { c }
+  else if c.has("text") { c.text }
+  else if c.has("children") { c.children.map(_content-to-string).join("") }
+  else if c.has("body") { _content-to-string(c.body) }
+  else { "" }
+}
+
 #let ccn-defaults = (
   year: 2026,
   edition: "9th",
@@ -203,7 +215,7 @@
   let license-url = ccn-licenses.at(license)
 
   set document(
-    title: if type(title) == str { title } else { "" },
+    title: _content-to-string(title),
     author: if mode == "submission" { "Anonymous" } else { authors.map(a => a.at("name")).join(", ") },
   )
 
