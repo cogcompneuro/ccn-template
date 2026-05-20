@@ -1,4 +1,4 @@
-// CCN Conference Typst Template (v2026.2)
+// CCN Conference Typst Template (v2026.3)
 // =========================================
 //
 // Apply with a show rule:
@@ -11,7 +11,7 @@
 //   "proceedings"       Deanonymized, branded footer + DOI (required).
 //   "extended-abstract" Deanonymized, branded footer.
 
-#let ccn-version = "v2026.2"
+#let ccn-version = "v2026.3"
 
 // Recursively extract plain text from content, so things like
 // `title: [Bayesian *Inference* in $X$]` can populate PDF metadata
