@@ -144,6 +144,13 @@
     let name = a.at("name")
     let supers = a.at("affil", default: ())
     if has-affil and supers != () and supers.len() > 0 {
+      for i in supers {
+        assert(
+          type(i) == int and i >= 1 and i <= affiliations.len(),
+          message: "ccn: affil index " + repr(i) + " for author '" + name
+            + "' is out of range 1.." + str(affiliations.len()),
+        )
+      }
       let s = supers.map(i => str(i)).join(",")
       [#name#super[#s]]
     } else {
