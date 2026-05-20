@@ -56,3 +56,39 @@ CCN does not allow a Word template for the Proceedings track due to the difficul
 With Microsoft Word installed, double-click the template `.dotx` file for your stage; Word creates a new document from it. If submitting the deanonymized version, replace the placeholder title, author block (camera-ready only), abstract, and body text with your own, keeping the section structure and formatting.
 
 > **Note on line numbers.** Line numbers are a *nice-to-have* (not required) for CCN double-blind review. Microsoft Word's line-numbering feature does **not** render correctly for this template's multi-column, multi-section layout (it numbers only the first column and miscounts across section breaks), so the Word template ships without them. If you'd like line numbers, the **LaTeX** and **Typst** templates in submission mode include them and number correctly.
+
+## Typst
+
+### Templates
+
+- **`typst/ccn_proceedings.typ`** — Full proceedings paper (8 pages + references)
+- **`typst/ccn_extended_abstract.typ`** — Extended abstract (2 pages + references)
+
+### Mode options
+
+```typst
+// Anonymized
+#show: ccn.with(mode: "submission", ...)               // for submission (default): anonymous
+
+// Deanonymized
+#show: ccn.with(mode: "proceedings", doi: "...", ...)  // for accepted proceedings papers only
+#show: ccn.with(mode: "extended-abstract", ...)        // for accepted extended abstracts only
+#show: ccn.with(mode: "preprint", ...)                 // for dissemination on preprint servers before acceptance
+```
+
+### Instructions
+
+First, click the green **Code** button above, then **Download ZIP**.
+
+#### Option 1: Cloud development
+
+Upload the zip to the [Typst web app](https://typst.app/).
+
+#### Option 2: Local development
+
+Unzip and build with [`typst`](https://github.com/typst/typst):
+
+```bash
+cd typst
+typst compile ccn_proceedings.typ
+```

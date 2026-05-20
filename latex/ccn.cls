@@ -4,7 +4,7 @@
 % See ../CHANGELOG.md for version history.
 
 \NeedsTeXFormat{LaTeX2e}[2020/10/01]
-\ProvidesClass{ccn}[v2026.2 CCN Conference Document Class]
+\ProvidesClass{ccn}[v2026.3 CCN Conference Document Class]
 
 %% ============================================================================
 %% VERSION OPTIONS
@@ -244,6 +244,11 @@
 \if@ccnpreprint
   \thispagestyle{empty}
   \pagestyle{empty}
+  % Preprint has no page-1 footer to reserve space for, so reclaim the
+  % 0.5" of body capacity that the branded-footer modes give back to the
+  % `ccnfirstpage` style. This makes the preprint body 9.25" on every
+  % page, matching pages 2+ in the other modes.
+  \AtBeginDocument{\global\setlength{\textheight}{9.25in}}
 \else
   \AtBeginDocument{\thispagestyle{ccnfirstpage}}
   \AtBeginShipoutNext{\global\setlength{\textheight}{9.25in}\global\setlength{\footskip}{30pt}}

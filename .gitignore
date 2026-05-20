@@ -13,6 +13,7 @@
 *.lof
 *.lot
 *.bak
+.direnv/
 
 # Output (uncomment to track PDFs)
 # *.pdf
