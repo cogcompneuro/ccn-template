@@ -87,7 +87,7 @@
 
 #let _doi-link(doi) = {
   if doi != none and doi != "" {
-    [#link("https://doi.org/" + doi)[#text(fill: ccn-links)[`doi:` #doi]] ]
+    [#link("https://doi.org/" + doi)[#text(fill: ccn-links, raw("doi:" + doi))] ]
   }
 }
 
