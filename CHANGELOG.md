@@ -2,9 +2,13 @@
 
 ## 2026
 
+### v2026.3
+
+- Modifications (Erin Grant, Logan Walls)
+
 ### v2026.2
 
-- Modifications (Erin Grant)
+- Modifications (Erin Grant, Emil Stroecker)
 
 ### v2026.1
 
