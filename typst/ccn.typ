@@ -301,7 +301,7 @@
     first-line-indent: (amount: 0.125in, all: false),
   )
   set par.line(
-    numbering: n => text(size: 6pt)[#n],
+    numbering: if mode == "submission" { n => text(size: 6pt)[#n]} else { none },
     number-clearance: 6pt,
   )
 
