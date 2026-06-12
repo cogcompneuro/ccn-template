@@ -3,7 +3,7 @@
 Official templates for submission to the [Conference on Cognitive Computational Neuroscience (CCN)](https://ccneuro.org).
 See the [CCN documentation](https://cogcompneuro.github.io/docs/) for detailed submission instructions.
 
-Templates are provided in two formats, **LaTeX** and **Microsoft Word**, that render the same layout.
+Templates are provided in three formats, **LaTeX**, **Typst**, and **Microsoft Word**, that render the same layout.
 To access the files, click the green **Code** button above, then **Download ZIP**, and unzip.
 
 ## LaTeX
