@@ -1,4 +1,4 @@
-// CCN Conference Typst Template (v2026.3)
+// CCN Conference Typst Template (v2026.4)
 // =========================================
 //
 // Apply with a show rule:
@@ -11,7 +11,7 @@
 //   "proceedings"       Deanonymized, branded footer + DOI (required).
 //   "extended-abstract" Deanonymized, branded footer.
 
-#let ccn-version = "v2026.3"
+#let ccn-version = "v2026.4"
 
 // Recursively extract plain text from content, so things like
 // `title: [Bayesian *Inference* in $X$]` can populate PDF metadata
@@ -429,9 +429,22 @@
     ]
   }
 
-  // Bibliography — APA style with 1/8" hanging indent per spec.
+  // Bibliography — APA style with 1/8" (9pt) hanging indent per spec.
+  // Typst hard-codes a 1.5em hang for CSL entries (blocks with
+  // `inset: (left: 1.5em)` and a leading `h(-1.5em)`; `par(hanging-indent)`
+  // has no effect on them), so rewrite the blocks with that exact inset —
+  // which also skips the heading block and stops recursion — to a 1/8" hang.
   set bibliography(title: "References", style: "apa")
-  show bibliography: set par(hanging-indent: 0.125in, first-line-indent: 0pt)
+  show bibliography: it => {
+    show block: b => {
+      if b.inset == (left: 0% + 1.5em) {
+        block(inset: (left: 0.125in), h(1.5em - 0.125in) + b.body)
+      } else {
+        b
+      }
+    }
+    it
+  }
 
   // Mirror ccn.cls's page-1 quirk (textheight 8.75" on page 1, 9.25" on
   // page 2+) by reserving 0.5" of body capacity at the bottom of page 1 —

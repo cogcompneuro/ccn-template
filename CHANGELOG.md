@@ -2,6 +2,16 @@
 
 ## 2026
 
+### v2026.4
+
+- Typst: render the bibliography hanging indent at 1/8 inch (9 pt), matching
+  the LaTeX and Word templates and the documented spec. Typst hard-codes a
+  1.5 em (15 pt) hang for the built-in APA style, so `ccn.typ` now rewrites
+  the reference-entry blocks to a 1/8 inch hang. Citation and reference
+  formatting is unchanged. Note: PDFs built with the Typst template v2026.3
+  or earlier render a 15 pt hang. (Erin Grant)
+- Typst: only render line numbers in submission mode. (Logan Walls)
+
 ### v2026.2
 
 - Modifications (Erin Grant)
