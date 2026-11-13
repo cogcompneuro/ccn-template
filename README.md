@@ -10,8 +10,8 @@ To access the files, click the green **Code** button above, then **Download ZIP*
 
 ### Templates
 
-- **`latex/ccn_proceedings.tex`** — Full proceedings paper (8 pages + references)
-- **`latex/ccn_extended_abstract.tex`** — Extended abstract (2 pages + references)
+- **`latex/ccn_proceedings.tex`** — Full proceedings paper (8 pages + references + optional acknowledgment, AI disclosure and supplement)
+- **`latex/ccn_extended_abstract.tex`** — Extended abstract (2 pages + references + optional acknowledgment and AI disclosure)
 
 ### Document class options
 
@@ -61,8 +61,8 @@ With Microsoft Word installed, double-click the template `.dotx` file for your s
 
 ### Templates
 
-- **`typst/ccn_proceedings.typ`** — Full proceedings paper (8 pages + references)
-- **`typst/ccn_extended_abstract.typ`** — Extended abstract (2 pages + references)
+- **`typst/ccn_proceedings.typ`** — Full proceedings paper (8 pages + references + optional acknowledgment, AI disclosure and supplement)
+- **`typst/ccn_extended_abstract.typ`** — Extended abstract (2 pages + references + optional acknowledgment and AI disclosure)
 
 ### Mode options
 

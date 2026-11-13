@@ -6,7 +6,9 @@
 % Modified : David Noelle (dnoelle at ucmerced.edu)     11/19/2014
 
 
-@InProceedings{ChalnickBillman1988a,
+% Typst APA compatibility: represent this paper as a contribution to the
+% proceedings book so the publisher and page range are retained.
+@InBook{ChalnickBillman1988a,
   author =	 {A. Chalnick and D. Billman},
   title =	 {Unsupervised learning of correlational structure},
   booktitle =	 {Proceedings of the Tenth Annual Conference of the
@@ -17,7 +19,8 @@
   publisher =	 {Lawrence Erlbaum Associates}
 }
 
-@InCollection{Feigenbaum1963a,
+% Typst APA compatibility: inbook avoids repeating the collection title.
+@InBook{Feigenbaum1963a,
   author =	 {E. A. Feigenbaum},
   title =	 {The simulation of verbal learning behavior},
   booktitle =	 {Computers and thought},
@@ -37,10 +40,13 @@
   pages =	 {287--317}
 }
 
+% Typst APA currently reads publisher rather than institution/school for
+% these report/thesis entries; the duplicate fields preserve the same facts.
 @TechReport{OhlssonLangley1985a,
   author =	 {S. Ohlsson and P. Langley},
   title =	 {Identifying solution paths in cognitive diagnosis},
   institution =	 {Carnegie Mellon University, The Robotics Institute},
+  publisher = {Carnegie Mellon University, The Robotics Institute},
   year =	 1985,
   address =	 {Pittsburgh, PA},
   number =	 {CMU-RI-TR-85-2}
@@ -51,6 +57,7 @@
   title =	 {How real is fictive motion?},
   school =	 {Psychology Department, University of California,
                   Santa Cruz},
+  publisher = {Psychology Department, University of California, Santa Cruz},
   year =	 2001,
   type =	 {Doctoral dissertation}
 }
@@ -60,6 +67,7 @@
   title =	 {Production system models of practice effects},
   school =	 {Department of Psychology, University of Michigan,
                   Ann Arbor},
+  publisher = {Department of Psychology, University of Michigan, Ann Arbor},
   year =	 1978,
   type =	 {Doctoral dissertation}
 }
