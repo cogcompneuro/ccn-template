@@ -187,11 +187,13 @@ Example disclosures (adapt to reflect actual use):
 
 "No generative AI tools were used in this work."
 
-"We used ChatGPT to edit the manuscript for grammar and clarity. The authors
-reviewed all edits."
+"We used ChatGPT to edit the manuscript for grammar and clarity.
+The authors reviewed all edits and take full responsibility for
+the submitted work."
 
-"We used GitHub Copilot to draft analysis code. The authors reviewed and tested
-the code."
+"We used GitHub Copilot to draft analysis code.
+The authors reviewed and tested the code and take full responsibility for
+the submitted work.""
 
 
 = Double-blind Review
