@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------
 // CCN Conference - Extended Abstract Track Template (Typst)
-// For papers up to 2 pages (excluding references); no supplement.
+// For papers up to 2 pages (excluding references, acknowledgments, and AI disclosure); no supplement.
 // -----------------------------------------------------------------------
 
 #import "ccn.typ": ccn
@@ -13,7 +13,7 @@
   mode: "submission",
   // mode: "extended-abstract",
 
-  title: [Formatting Instructions for CCN 2026 Extended Abstracts],
+  title: [Formatting Instructions for CCN 2027 Extended Abstracts],
 
   authors: (
     (name: "Author One",   affil: (1,)),
@@ -39,8 +39,8 @@
     a good abstract should (a) give context about what the problem is and why it
     matters (b) give the contents and explain what was done and what was found
     (c) give a clear conclusion including what we learned and how it changes the
-    way we think about the universe. And because Konrad is writing this, he can
-    not avoid shamelessly plugging his writing guide:
+    way we think about the universe. And because Konrad is writing this, he can not
+    avoid shamelessly plugging his writing guide:
     #link("https://doi.org/10.1371/journal.pcbi.1005619")[doi.org/10.1371/journal.pcbi.1005619].
     See you at CCN.
   ],
@@ -50,7 +50,7 @@
 = General Formatting Instructions
 
 The text, tables and figures of a CCN extended abstract submission can be no
-longer than 2 pages. If needed, references may extend onto additional pages.
+longer than 2 pages, excluding references, acknowledgments, and AI disclosure.
 
 The text of the paper should be formatted in two columns with an overall width of
 7 inches (17.8 cm) and length of 9.25 inches (23.5 cm), with 0.25 inches between
@@ -93,9 +93,9 @@ Leave one line space above the heading, but no space after the heading.
 
 = Formalities, Footnotes, and Floats
 
-Use standard APA 7 citation format. Citations within the text should include the
+Use standard APA citation format. Citations within the text should include the
 author's last name and year. If the authors' names are included in the sentence,
-place only the year in parentheses, as in #cite(<NewellSimon1972a>, form: "prose"),
+place only the year in parentheses, as in Newell and Simon (#cite(<NewellSimon1972a>, form: "year")),
 but otherwise place the entire reference in parentheses with the authors and year
 separated by a comma @NewellSimon1972a. List multiple references alphabetically
 and separate them by semicolons @ChalnickBillman1988a @NewellSimon1972a. Use the
@@ -136,6 +136,14 @@ wide tables across both columns.
 ) <sample-table>
 
 
+#figure(
+  rect(width: 12cm, height: 4cm, stroke: 0.5pt),
+  caption: [This is a figure spanning both columns.],
+  placement: top,
+  scope: "parent",
+) <sample-figure-wide>
+
+
 == Figures
 
 Make sure that the artwork can be printed well (e.g. dark colors) and that the
@@ -151,13 +159,6 @@ column, or set wide figures across both columns.
   caption: [This is a figure spanning a single column.],
 ) <sample-figure>
 
-#figure(
-  rect(width: 12cm, height: 4cm, stroke: 0.5pt),
-  caption: [This is a figure spanning both columns.],
-  placement: bottom,
-  scope: "parent",
-) <sample-figure-wide>
-
 
 == Math
 
@@ -167,37 +168,51 @@ $ P(H | D) = (P(D | H) P(H)) / P(D) . $
 
 = Supplementary Materials
 
-An *Acknowledgments* section may appear before the references to include author
-contributions. Use of automated tools (such as generative AI) must be disclosed
-in this section, describing the tools used and their role (e.g., drafting,
-editing, code generation). Technical appendices are not permitted for extended
-abstracts.
+Technical appendices are not permitted for extended abstracts.
+
+An *Acknowledgments* section may appear before the references
+to include author contributions. Acknowledgments do not count toward the submission
+page limit. Any acknowledgments included for review must be anonymized.
+
+*All submissions are strongly encouraged to include an AI use disclosure statement*,
+specifying which tools were used and for what purposes. Submissions that did not
+use generative AI should state this explicitly. The goal of this policy is to
+encourage transparency between authors and reviewers about AI use.
+
+Place the statement in an "AI Use Disclosure" section before the references, and
+keep it anonymous for review.
+The AI use disclosure statement does not count toward the submission page limit.
+
+Example disclosures (adapt to reflect actual use):
+
+"No generative AI tools were used in this work."
+
+"We used ChatGPT to edit the manuscript for grammar and clarity.
+The authors reviewed all edits and take full responsibility for
+the submitted work."
+
+"We used GitHub Copilot to draft analysis code.
+The authors reviewed and tested the code and take full responsibility for
+the submitted work.""
 
 
 = Double-blind Review
 
 CCN's reviewing process is double-blind, and it is the authors' responsibility to
 anonymize their submissions. Do not include any identifying information, such as
-author names, affiliations, or acknowledgments, in the abstract, main text,
-figures, or metadata. When citing your own work, ensure anonymity to maintain
-double-blind review standards (e.g., write "In previous work by Author et al.
-(2024), ..." instead of "In our previous work (Author et al., 2024), ..."). If
-citing a non-anonymous preprint (e.g., from arXiv, social media, or other
-websites), use anonymized phrasing (e.g., "Author et al. (2024) concurrently
-demonstrate ..."). Reviewers are instructed not to actively seek out such
-preprints, but their discovery does not constitute a conflict of interest.
-Alternatively, authors may choose not to cite their own non-anonymous preprints,
-such as those on arXiv. However, prior publications on related topics must be
-appropriately anonymized when cited. We encourage including links to code and
-artifacts in the spirit of open science, but please ensure that the linked
-material is anonymized; e.g. create a dedicated account to host your material
-rather than the account of one of the authors. Reviewers are not required to
-review linked material.
+author names, affiliations, or identifying acknowledgments, in the abstract, main text,
+figures, or metadata. When citing your own prior work, refer to it in the third
+person (e.g., "Author et al. (2024) show ...") rather than in a way that reveals
+your authorship (e.g., "in our previous work"). We encourage including links to
+code and artifacts in the spirit of open science, but please ensure that the
+linked material is anonymized; e.g., create a dedicated account to host your
+material rather than the account of one of the authors. Reviewers are not
+required to review linked material.
 
 
 = Referencing Prior Work
 
-Follow the APA 7 Publication Manual for citation format, both within the text and
+Follow the APA Publication Manual for citation format, both within the text and
 in the reference list, with the following exceptions: (a) do not cite the page
 numbers of any book, including chapters in edited volumes; (b) use the same
 format for unpublished references as for published ones. Alphabetize references

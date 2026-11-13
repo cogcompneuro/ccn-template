@@ -1,4 +1,4 @@
-// CCN Conference Typst Template (v2026.4)
+// CCN Conference Typst Template (v2027.1)
 // =========================================
 //
 // Apply with a show rule:
@@ -11,7 +11,7 @@
 //   "proceedings"       Deanonymized, branded footer + DOI (required).
 //   "extended-abstract" Deanonymized, branded footer.
 
-#let ccn-version = "v2026.4"
+#let ccn-version = "v2027.1"
 
 // Recursively extract plain text from content, so things like
 // `title: [Bayesian *Inference* in $X$]` can populate PDF metadata
@@ -26,9 +26,9 @@
 }
 
 #let ccn-defaults = (
-  year: 2026,
-  edition: "9th",
-  location: "New York, NY, USA",
+  year: 2027,
+  edition: "10th",
+  location: "Edinburgh, UK",
 )
 
 // ----------------------------------------------------------------------------
@@ -305,10 +305,8 @@
     number-clearance: 6pt,
   )
 
-  // Heading spacings — match v2026.1 LaTeX (`\@startsection` uses 9pt
-  // above-skip on §/§§/§§§). The body-text spec says "one line space
-  // above" (12pt), but LaTeX deviates to 9pt. This tries to match that
-  // behavior.
+  // Heading spacings — match LaTeX (`\@startsection` uses 9pt
+  // above-skip on §/§§/§§§ and 3pt below-skip on §/§§).
   let sec-above = 9pt
   let sec-below = 3pt
 
@@ -334,23 +332,13 @@
     v(sec-above, weak: true)
     h(-0.125in)
     text(size: 10pt, weight: "bold", it.body)
-    h(0.5em)
+    h(1em)
   }
   set heading(numbering: none)
 
-  // Math: render Roman letters and digits in the body sans-serif, matching
-  // the LaTeX template's `\RequirePackage[helvet]{sfmath}`. Math operators
-  // and Greek glyphs fall through to Typst's bundled serif `New Computer
-  // Modern Math`, mirroring sfmath's mix of Helvetica letters + CM symbols.
-  show math.equation: set text(font: (
-    "TeX Gyre Heros",
-    "Helvetica",
-    "Arial",
-    "Liberation Sans",
-    "DejaVu Sans",
-    "Noto Sans",
-    "New Computer Modern Math",
-  ))
+  // Sans-serif mathematical letterforms, with a math-capable font for operators.
+  show math.equation: set text(font: "New Computer Modern Math")
+  show math.equation: math.sans
   set math.equation(numbering: "(1)")
 
   // Figures
@@ -450,6 +438,8 @@
   // page 2+) by reserving 0.5" of body capacity at the bottom of page 1 —
   // matching `\AtBeginShipoutNext{\textheight=9.25in, footskip=30pt}` in
   // ccn.cls so Typst and LaTeX authors get the same effective page-1 budget.
+  // Limitation: later full-width bottom floats can stack below this spacer
+  // and overlap the first-page footer. Use top placement or a later page.
   if mode != "preprint" {
     place(
       bottom + left,

@@ -4,7 +4,7 @@
 % See ../CHANGELOG.md for version history.
 
 \NeedsTeXFormat{LaTeX2e}[2020/10/01]
-\ProvidesClass{ccn}[v2026.4 CCN Conference Document Class]
+\ProvidesClass{ccn}[v2027.1 CCN Conference Document Class]
 
 %% ============================================================================
 %% VERSION OPTIONS
@@ -39,9 +39,9 @@
 %% ============================================================================
 
 % TODO: Increment this yearly.
-\newcommand{\@ccnyear}{2026}
-\newcommand{\@ccnedition}{9th}
-\newcommand{\@ccnlocation}{New York, NY, USA}
+\newcommand{\@ccnyear}{2027}
+\newcommand{\@ccnedition}{10th}
+\newcommand{\@ccnlocation}{Edinburgh, UK}
 
 \let\@ccndoi\@empty
 \newcommand{\@ccnlicense}{CC BY 4.0}

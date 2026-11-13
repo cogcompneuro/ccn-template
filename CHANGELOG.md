@@ -1,5 +1,11 @@
 # Changelog
 
+## 2027
+
+### v2027.1
+
+- Template updates for CCN 2027, revised AI disclosure policy, and formatting fixes.
+
 ## 2026
 
 ### v2026.4
